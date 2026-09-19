@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudharrshan S — Full Stack Developer & AI Enthusiast</title>
+  <meta name="description" content="Portfolio of Sudharrshan S — Full Stack Developer and AI Enthusiast from Tamil Nadu, India. Building intelligent web applications, from voice assistants to healthcare platforms.">
+  <meta name="author" content="Sudharrshan S">
+  <meta name="theme-color" content="#080D14">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sudharrshan S — Full Stack Developer & AI Enthusiast">
+  <meta property="og:description" content="Building things that live on the internet — from intelligent voice assistants to full-blown healthcare platforms.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon (simple SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Subtle architectural technical grid -->
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- Ambient blue/cyan glow orbs -->
+  <div class="ambient-glow ambient-glow--1" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow--2" aria-hidden="true"></div>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Ambient particle background (desktop only, respects reduced motion) -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Custom cursor (fine-pointer devices only) -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+
+  <!-- ═══════════════════════════════════════════════════
+       Navigation
+       ═══════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#hero" class="navbar__logo">Sudharrshan<span>.</span></a>
+
+      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="navbar__links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="https://drive.google.com/file/d/1XkOhRN44UfGCIrwKwRkP6_zeexWPEPVL/view?usp=sharing" target="_blank" rel="noopener" class="navbar__resume-btn">
+            ↓ Resume
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════
+       Hero Section
+       ═══════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <canvas id="fluid-canvas"></canvas>
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <p class="hero__greeting reveal">// Hello, world</p>
+
+      <h1 class="hero__name reveal reveal-delay-1">
+        I'm <span class="hero__name-accent">Sudharrshan S</span>
+      </h1>
+
+      <p class="hero__tagline reveal reveal-delay-2">
+        <span id="typed-text"></span><span class="typed-cursor">|</span>
+      </p>
+
+      <p class="hero__bio reveal reveal-delay-3">
+        A passionate full-stack developer and AI enthusiast from Tamil Nadu, India, who builds things that live on the internet — from intelligent voice assistants to full-blown healthcare platforms.
+      </p>
+
+      <div class="hero__cta-group reveal reveal-delay-4">
+        <a href="https://drive.google.com/file/d/1XkOhRN44UfGCIrwKwRkP6_zeexWPEPVL/view?usp=sharing" target="_blank" rel="noopener" class="btn btn--primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
+        </a>
+        <a href="#projects" class="btn btn--secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          View Projects
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       Tech Marquee
+       ═══════════════════════════════════════════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">Python</span>
+      <span class="marquee__item">Java</span>
+      <span class="marquee__item">JavaScript</span>
+      <span class="marquee__item">React</span>
+      <span class="marquee__item">Node.js</span>
+      <span class="marquee__item">Express.js</span>
+      <span class="marquee__item">Flask</span>
+      <span class="marquee__item">Django</span>
+      <span class="marquee__item">MySQL</span>
+      <span class="marquee__item">Azure</span>
+      <span class="marquee__item">LangChain</span>
+      <span class="marquee__item">Generative AI</span>
+      <!-- duplicated for seamless loop -->
+      <span class="marquee__item">Python</span>
+      <span class="marquee__item">Java</span>
+      <span class="marquee__item">JavaScript</span>
+      <span class="marquee__item">React</span>
+      <span class="marquee__item">Node.js</span>
+      <span class="marquee__item">Express.js</span>
+      <span class="marquee__item">Flask</span>
+      <span class="marquee__item">Django</span>
+      <span class="marquee__item">MySQL</span>
+      <span class="marquee__item">Azure</span>
+      <span class="marquee__item">LangChain</span>
+      <span class="marquee__item">Generative AI</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       About Section
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="deco-shape deco-shape--1"></div>
+
+      <span class="section-label reveal">01 // About Me</span>
+      <h2 class="section-title reveal">Who I Am</h2>
+      <p class="section-subtitle reveal">A builder at heart, a learner by nature.</p>
+
+      <div class="about__photo-wrapper reveal">
+        <div class="about__photo">
+          <img src="profile.jpg" alt="Sudharrshan S — Full Stack Developer" width="220" height="220">
+        </div>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>
+            I'm Sudharrshan — a Computer Science undergraduate at SRM Valliammai Engineering College, passionate about creating software that makes a difference. Currently building AI-powered web apps and diving deep into Generative AI, LLMs, and LangChain.
+          </p>
+          <p>
+            My journey spans from crafting voice assistants inspired by JARVIS to developing healthcare platforms that connect patients with providers. I believe in writing clean, purposeful code and constantly pushing the boundaries of what I can build.
+          </p>
+        </div>
+
+        <div class="about__details reveal reveal-delay-1">
+          <ul class="about__info-list" style="margin: 0;">
+            <li>
+              <span class="about__info-label">Location</span>
+              <span class="about__info-value">Tamil Nadu, India</span>
+            </li>
+            <li>
+              <span class="about__info-label">Email</span>
+              <span class="about__info-value"><a href="mailto:sudharrshancourse23@gmail.com">sudharrshancourse23@gmail.com</a></span>
+            </li>
+            <li>
+              <span class="about__info-label">Phone</span>
+              <span class="about__info-value"><a href="tel:+919585244783">+91 95852 44783</a></span>
+            </li>
+            <li>
+              <span class="about__info-label">Focus</span>
+              <span class="about__info-value">Full Stack · AI / ML · Generative AI</span>
+            </li>
+            <li>
+              <span class="about__info-label">Status</span>
+              <span class="about__info-value" style="color: var(--accent-teal);">Open to Collaborate</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Experience Timeline
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="deco-shape deco-shape--2"></div>
+
+      <span class="section-label reveal">02 // Experience</span>
+      <h2 class="section-title reveal">Where I've Worked</h2>
+      <p class="section-subtitle reveal">Internships and real-world experience shaping my engineering craft.</p>
+
+      <div class="timeline">
+
+        <!-- SPYDX -->
+        <div class="timeline__item reveal">
+          <div class="timeline__dot"></div>
+          <div class="timeline__header">
+            <div>
+              <div class="timeline__role">Junior Java Full Stack Development Intern</div>
+              <div class="timeline__company">SPYDX</div>
+            </div>
+            <span class="timeline__period">Apr 2025 – Jul 2025</span>
+          </div>
+          <div class="timeline__location">Tamil Nadu, India</div>
+          <p class="timeline__description">
+            Completed a rigorous 3-month Java full-stack internship working on real-time production projects at SPYDX. Gained deep hands-on experience with Java backend development, building and consuming REST APIs, and navigating full-stack workflows from requirement gathering to deployment. Contributed to the design and implementation of scalable web application components within an agile team environment, collaborating across cross-functional teams to ship features on tight deadlines.
+          </p>
+          <div class="timeline__stack">
+            <span class="tag">Java</span>
+            <span class="tag">Spring</span>
+            <span class="tag tag--cyan">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag tag--teal">MySQL</span>
+          </div>
+        </div>
+
+        <!-- Xonther -->
+        <div class="timeline__item reveal">
+          <div class="timeline__dot"></div>
+          <div class="timeline__header">
+            <div>
+              <div class="timeline__role">Full Stack Development Intern</div>
+              <div class="timeline__company">Xonther India Pvt. Ltd.</div>
+            </div>
+            <span class="timeline__period">Jun 2024 – Jul 2024</span>
+          </div>
+          <div class="timeline__location">Tamil Nadu, India</div>
+          <p class="timeline__description">
+            Gained hands-on experience in full-stack development workflows across a real product environment at Xonther India. Contributed to core web application features spanning both frontend and backend layers, building responsive UIs with React while writing backend logic with Node.js and Express.js. Actively participated in code reviews, debugging sessions, and sprint retrospectives, strengthening both technical skills and collaborative development practices.
+          </p>
+          <div class="timeline__stack">
+            <span class="tag">JavaScript</span>
+            <span class="tag tag--cyan">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag tag--teal">Express.js</span>
+          </div>
+        </div>
+
+        <!-- IBM -->
+        <div class="timeline__item reveal">
+          <div class="timeline__dot"></div>
+          <div class="timeline__header">
+            <div>
+              <div class="timeline__role">Networking Intern</div>
+              <div class="timeline__company">IBM</div>
+            </div>
+            <span class="timeline__period">Jun 2023 – Jul 2023</span>
+          </div>
+          <div class="timeline__location">Tamil Nadu, India</div>
+          <p class="timeline__description">
+            Assisted with network setup and configuration at IBM, troubleshooting connectivity issues and performing basic network diagnostics in a large-scale enterprise environment. Built working knowledge of routing, switching, and network security protocols, gaining exposure to how networking infrastructure underpins complex IT systems. This experience provided foundational understanding of the infrastructure layer that supports the applications and services built at scale.
+          </p>
+          <div class="timeline__stack">
+            <span class="tag tag--teal">Linux</span>
+            <span class="tag">Networking</span>
+            <span class="tag tag--cyan">Security</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Featured Projects
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="deco-shape deco-shape--3"></div>
+
+      <span class="section-label reveal">03 // Projects</span>
+      <h2 class="section-title reveal">Featured Work</h2>
+      <p class="section-subtitle reveal">End-to-end projects showcasing problem-solving, architecture, and execution.</p>
+
+      <div class="project-filters reveal" role="tablist" aria-label="Filter projects by technology">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ai">AI / ML</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+      </div>
+
+      <div class="projects__grid">
+
+        <!-- J.A.R.V.I.S. -->
+        <div class="project-card reveal" data-category="ai python">
+          <button class="project-card__expand" aria-label="View project details">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+          </button>
+          <div class="project-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3 class="project-card__title">J.A.R.V.I.S. / Jarvis-2.0</h3>
+          <p class="project-card__description">
+            <strong>Problem:</strong> Needed a personal voice assistant capable of real-time task execution and intelligent responses beyond simple commands.
+            <br><br>
+            <strong>Approach:</strong> Built a voice-activated AI assistant inspired by Marvel's JARVIS, using NLP for intent recognition and speech synthesis for natural responses. The system handles information retrieval, system integration, and personalized responses. Jarvis-2.0 iterates on the original with improved NLP accuracy and expanded capabilities.
+          </p>
+          <div class="project-card__stack">
+            <span class="tag">Python</span>
+            <span class="tag tag--cyan">NLP</span>
+            <span class="tag tag--teal">SpeechRecognition</span>
+            <span class="tag">pyttsx3</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/mrtechdynamo23/JARVIS" target="_blank" rel="noopener" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              JARVIS
+            </a>
+            <a href="https://github.com/mrtechdynamo23/Jarvis-2.0" target="_blank" rel="noopener" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Jarvis-2.0
+            </a>
+          </div>
+        </div>
+
+        <!-- LexiSense -->
+        <div class="project-card reveal reveal-delay-1" data-category="ai python">
+          <button class="project-card__expand" aria-label="View project details">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+          </button>
+          <div class="project-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <h3 class="project-card__title">LexiSense</h3>
+          <p class="project-card__description">
+            Python/NLP-based platform designed to process unstructured text and extract meaningful insights using natural-language-processing and machine-learning techniques.
+          </p>
+          <div class="project-card__stack">
+            <span class="tag">Python</span>
+            <span class="tag tag--cyan">NLP</span>
+            <span class="tag tag--teal">Machine Learning</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/mrtechdynamo23" target="_blank" rel="noopener" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- CRISPR gRNA Efficiency Prediction -->
+        <div class="project-card reveal reveal-delay-2" data-category="ai python">
+          <button class="project-card__expand" aria-label="View project details">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+          </button>
+          <div class="project-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          </div>
+          <h3 class="project-card__title">CRISPR gRNA Efficiency Prediction</h3>
+          <p class="project-card__description">
+            Deep learning-based predictive framework utilizing Convolutional Neural Networks (CNNs) to evaluate CRISPR-Cas9 guide RNA cleavage efficiency and analyze off-target mutation risks directly from genomic sequence data.
+          </p>
+          <div class="project-card__stack">
+            <span class="tag">Python</span>
+            <span class="tag tag--cyan">Deep Learning</span>
+            <span class="tag tag--teal">CNN</span>
+            <span class="tag">Genomics</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#research" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              View Publication
+            </a>
+          </div>
+        </div>
+
+        <!-- Medico -->
+        <div class="project-card reveal" data-category="web">
+          <button class="project-card__expand" aria-label="View project details">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+          </button>
+          <div class="project-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="project-card__title">Medico — Medical &amp; Appointment Portal</h3>
+          <p class="project-card__description">
+            <strong>Problem:</strong> Healthcare providers needed a unified platform for appointment scheduling, medical records, and patient-provider communication.
+            <br><br>
+            <strong>Approach:</strong> Designed and built a full-stack healthcare platform with secure login and role-based access for patients, doctors, and admins. Implemented appointment booking workflows, medical record management, and real-time communication features with a MySQL-backed data layer ensuring HIPAA-conscious data handling.
+          </p>
+          <div class="project-card__stack">
+            <span class="tag tag--cyan">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag tag--teal">Express.js</span>
+            <span class="tag">MySQL</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/mrtechdynamo23/Medico" target="_blank" rel="noopener" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Source Code
+            </a>
+          </div>
+        </div>
+
+        <!-- Pool Consultant -->
+        <div class="project-card reveal reveal-delay-1" data-category="ai web python">
+          <button class="project-card__expand" aria-label="View project details">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+          </button>
+          <div class="project-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="project-card__title">Pool Consultant Management System</h3>
+          <p class="project-card__description">
+            <strong>Problem:</strong> Recruitment teams needed an automated way to match consultant skills to job roles instead of manual resume screening.
+            <br><br>
+            <strong>Approach:</strong> Built a consultant management system featuring resume upload with automated skill-extraction using NLP, a percentage-based skill-match calculator with dashboard visualizations, and a comprehensive admin panel for job-role mapping and consultant analytics. The system dramatically reduces time-to-match for staffing teams.
+          </p>
+          <div class="project-card__stack">
+            <span class="tag">Python</span>
+            <span class="tag tag--teal">Flask</span>
+            <span class="tag tag--cyan">React</span>
+            <span class="tag">MySQL</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/mrtechdynamo23/Pool-Consultant-Management-System" target="_blank" rel="noopener" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Source Code
+            </a>
+          </div>
+        </div>
+
+        <!-- Helmet Detection -->
+        <div class="project-card reveal reveal-delay-2" data-category="ai python">
+          <button class="project-card__expand" aria-label="View project details">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+          </button>
+          <div class="project-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 class="project-card__title">Helmet Detection</h3>
+          <p class="project-card__description">
+            <strong>Problem:</strong> Manual enforcement of helmet safety regulations is inconsistent and resource-intensive, especially in high-traffic areas.
+            <br><br>
+            <strong>Approach:</strong> Developed a computer-vision solution using Python for detecting helmet usage from image and video input. The model processes visual data in real-time and classifies whether subjects are wearing helmets, enabling automated safety compliance monitoring.
+          </p>
+          <div class="project-card__stack">
+            <span class="tag">Python</span>
+            <span class="tag tag--cyan">Computer Vision</span>
+            <span class="tag tag--teal">OpenCV</span>
+          </div>
+          <div class="project-card__links">
+            <a href="https://github.com/mrtechdynamo23/Helmet-detection" target="_blank" rel="noopener" class="project-card__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Source Code
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Published Research
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="research">
+    <div class="container">
+      <span class="section-label reveal">04 // Research &amp; Publication</span>
+      <h2 class="section-title reveal">Academic Contribution</h2>
+      <p class="section-subtitle reveal">Peer-reviewed research at the intersection of deep learning and genomics.</p>
+
+      <div class="research-card reveal">
+        <div class="research-card__glow"></div>
+
+        <div class="research-card__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Published Paper
+        </div>
+
+        <h3 class="research-card__title">
+          Deep Learning-Based Prediction of CRISPR gRNA Efficiency and Off-Target Risk Using Convolutional Neural Networks
+        </h3>
+
+        <div class="research-card__meta">
+          <span class="research-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            JAAFR · ISSN 2984-889X
+          </span>
+          <span class="research-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Vol. 4, Issue 3 — March 2026
+          </span>
+          <span class="research-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Impact Factor: 9.87 (Google Scholar)
+          </span>
+        </div>
+
+        <p class="research-card__meta" style="margin-bottom: 0.5rem;">
+          <span class="research-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Paper ID: JAAFR2603799 &nbsp;|&nbsp; Registration ID: 505529
+          </span>
+        </p>
+
+        <p class="research-card__authors">
+          Co-authors: Suma S, Shamyuktha S, Shravya G, Sudharrshan S
+        </p>
+
+        <div class="research-card__links">
+          <a href="https://jaafr.org" target="_blank" rel="noopener" class="btn btn--secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            JAAFR Journal
+          </a>
+          <a href="https://drive.google.com/file/d/1tW0nWxreR-twejzoPIIJg89OziQo9FHN/view?usp=sharing" target="_blank" rel="noopener" class="btn btn--secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Certificate
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Dedicated Certifications Showcase
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="certifications">
+    <div class="container">
+      <span class="section-label reveal">05 // Certifications</span>
+      <h2 class="section-title reveal">Verified Credentials</h2>
+      <p class="section-subtitle reveal">Professional certifications validating competencies in AI architecture, agent engineering, cloud platforms, and enterprise development.</p>
+
+      <div class="certifications-grid">
+
+        <!-- 1. Microsoft Agentic AI -->
+        <div class="cert-card reveal">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <span class="cert-card__badge">Certified</span>
+          </div>
+          <h3 class="cert-card__title">Microsoft Certified: Agentic AI Business Solutions Architect</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">Microsoft</span>
+          </div>
+        </div>
+
+        <!-- 2. SAP Generative AI -->
+        <div class="cert-card reveal reveal-delay-1">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <span class="cert-card__badge">Certified</span>
+          </div>
+          <h3 class="cert-card__title">SAP Certified – Generative AI Developer</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">SAP</span>
+          </div>
+        </div>
+
+        <!-- 3. Claude in Bedrock -->
+        <div class="cert-card reveal reveal-delay-2">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="cert-card__badge">Credential</span>
+          </div>
+          <h3 class="cert-card__title">Claude in Amazon Bedrock</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">Anthropic · AWS</span>
+          </div>
+        </div>
+
+        <!-- 4. Claude with Vertex AI -->
+        <div class="cert-card reveal">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="cert-card__badge">Credential</span>
+          </div>
+          <h3 class="cert-card__title">Claude with Google Cloud's Vertex AI</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">Anthropic · Google Cloud</span>
+          </div>
+        </div>
+
+        <!-- 5. Microsoft AI Agent Builder -->
+        <div class="cert-card reveal reveal-delay-1">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <span class="cert-card__badge">Certified</span>
+          </div>
+          <h3 class="cert-card__title">Microsoft Certified: AI Agent Builder Associate</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">Microsoft</span>
+          </div>
+        </div>
+
+        <!-- 6. Google Cloud Career Certificate -->
+        <div class="cert-card reveal reveal-delay-2">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span class="cert-card__badge">Certified</span>
+          </div>
+          <h3 class="cert-card__title">Google Cloud Career Certificate</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">Google Cloud</span>
+          </div>
+        </div>
+
+        <!-- 7. Oracle Java SE 21 -->
+        <div class="cert-card reveal">
+          <div class="cert-card__header">
+            <div class="cert-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <span class="cert-card__badge">Certified</span>
+          </div>
+          <h3 class="cert-card__title">Oracle Certified Professional: Java SE 21 Developer</h3>
+          <div class="cert-card__issuer">
+            <span>Issuing Authority:</span>
+            <span class="cert-card__issuer-name">Oracle</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Dedicated Achievements Showcase
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="achievements">
+    <div class="container">
+      <span class="section-label reveal">06 // Achievements</span>
+      <h2 class="section-title reveal">Honors &amp; Competitions</h2>
+      <p class="section-subtitle reveal">Recognized for technical excellence and competitive problem solving across premier hackathons and technology summits.</p>
+
+      <div class="achievements-grid">
+
+        <!-- Shaastra 2025 -->
+        <div class="achievement-card achievement-card--champion reveal">
+          <div class="achievement-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3 class="achievement-card__event">Shaastra 2025</h3>
+          <span class="achievement-card__org">IIT Madras</span>
+          <div class="achievement-card__rank">CHAMPION</div>
+        </div>
+
+        <!-- TCS HackQuest -->
+        <div class="achievement-card reveal reveal-delay-1">
+          <div class="achievement-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="7"/>
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+            </svg>
+          </div>
+          <h3 class="achievement-card__event">TCS HackQuest</h3>
+          <span class="achievement-card__org">National Competition</span>
+          <div class="achievement-card__rank">TOP 5</div>
+        </div>
+
+        <!-- Smart India Hackathon -->
+        <div class="achievement-card reveal reveal-delay-2">
+          <div class="achievement-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34"/>
+              <path d="M18 4H6v7a6 6 0 0 0 12 0V4z"/>
+            </svg>
+          </div>
+          <h3 class="achievement-card__event">Smart India Hackathon</h3>
+          <span class="achievement-card__org">Government of India</span>
+          <div class="achievement-card__rank">TOP 15</div>
+        </div>
+
+        <!-- KaarTech AION -->
+        <div class="achievement-card reveal reveal-delay-3">
+          <div class="achievement-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 15l-2 5l9-11h-7l2-5l-9 11h7z"/>
+            </svg>
+          </div>
+          <h3 class="achievement-card__event">KaarTech AION</h3>
+          <span class="achievement-card__org">Flagship AI Summit</span>
+          <div class="achievement-card__rank">3RD PLACE</div>
+        </div>
+
+      </div>
+
+      <!-- Stats / By The Numbers -->
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <span class="stat-card__number" data-count-to="9.32" data-decimals="2">0</span>
+          <span class="stat-card__label">CGPA</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count-to="3" data-decimals="0">0</span>
+          <span class="stat-card__label">Internships</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count-to="10" data-decimals="0" data-suffix="+">0</span>
+          <span class="stat-card__label">Projects &amp; Repos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count-to="7" data-decimals="0">0</span>
+          <span class="stat-card__label">Certifications</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count-to="1" data-decimals="0">0</span>
+          <span class="stat-card__label">Published Paper</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Dedicated Education Showcase
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="education">
+    <div class="container">
+      <span class="section-label reveal">07 // Education</span>
+      <h2 class="section-title reveal">Academic Background</h2>
+      <p class="section-subtitle reveal">Strong formal foundations in computer science, software engineering, and analytical problem-solving.</p>
+
+      <div class="education-grid">
+        <div class="edu-card reveal">
+          <div class="edu-card__degree">B.E. Computer Science &amp; Engineering</div>
+          <div class="edu-card__school">SRM Valliammai Engineering College</div>
+          <div class="edu-card__meta">
+            <span class="edu-card__score">CGPA: 9.32</span>
+            <span class="edu-card__date">Nov 2022 – May 2026</span>
+          </div>
+        </div>
+
+        <div class="edu-card reveal reveal-delay-1">
+          <div class="edu-card__degree">Higher Secondary (HSC)</div>
+          <div class="edu-card__school">ARLM Matriculation Higher Secondary School</div>
+          <div class="edu-card__meta">
+            <span class="edu-card__score">91.8%</span>
+            <span class="edu-card__date">Apr 2021 – May 2022</span>
+          </div>
+        </div>
+
+        <div class="edu-card reveal reveal-delay-2">
+          <div class="edu-card__degree">Secondary School (SSLC)</div>
+          <div class="edu-card__school">ARLM Matriculation Higher Secondary School</div>
+          <div class="edu-card__meta">
+            <span class="edu-card__score">92.4%</span>
+            <span class="edu-card__date">Apr 2019 – May 2020</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Technical Arsenal & Skills
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="skills">
+    <div class="container">
+      <span class="section-label reveal">08 // Skills &amp; Arsenal</span>
+      <h2 class="section-title reveal">Technical Arsenal</h2>
+      <p class="section-subtitle reveal">Core programming languages, frameworks, cloud platforms, and developer tooling.</p>
+
+      <div class="skills__grid">
+        <div class="skills__category reveal">
+          <div class="skills__category-name">Languages</div>
+          <div class="skills__tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+          </div>
+        </div>
+
+        <div class="skills__category reveal reveal-delay-1">
+          <div class="skills__category-name">Frameworks</div>
+          <div class="skills__tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">Angular</span>
+            <span class="skill-tag">Vue.js</span>
+            <span class="skill-tag">Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="skills__category reveal reveal-delay-2">
+          <div class="skills__category-name">Cloud / DevOps</div>
+          <div class="skills__tags">
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Azure DevOps</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+          </div>
+        </div>
+
+        <div class="skills__category reveal reveal-delay-3">
+          <div class="skills__category-name">Tools</div>
+          <div class="skills__tags">
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Excel</span>
+            <span class="skill-tag">VS Code</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strengths -->
+      <div class="reveal" style="margin-top: 3.5rem; text-align: center;">
+        <h3 style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-teal); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1.5rem;">Core Strengths</h3>
+        <div class="strengths">
+          <span class="strength-pill">Teamwork</span>
+          <span class="strength-pill">Leadership</span>
+          <span class="strength-pill">Problem-solving</span>
+          <span class="strength-pill">Critical Thinking</span>
+          <span class="strength-pill">Time Management</span>
+          <span class="strength-pill">Active Listening</span>
+          <span class="strength-pill">Resilience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Testimonials
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="testimonials" style="position: relative;">
+    <div class="deco-shape deco-shape--5"></div>
+    <div class="container">
+      <span class="section-label reveal">09 // Testimonials</span>
+      <h2 class="section-title reveal">What People Say</h2>
+      <p class="section-subtitle reveal">Feedback and recommendations from peers, project collaborators, and teammates.</p>
+
+      <div class="testimonial-slider reveal">
+        <div class="testimonial-track" id="testimonial-track">
+          <div class="testimonial-card">
+            <span class="testimonial-card__badge">AI Project Collaborator</span>
+            <p class="testimonial-card__quote">"Sudharrshan brings remarkable clarity and speed to machine learning pipelines. When collaborating on AI models and RAG architectures, his ability to diagnose latency bottlenecks, optimize inference, and deliver production-grade code under tight deadlines was outstanding."</p>
+            <p class="testimonial-card__author">— Shamyuktha, AI & Research Collaborator</p>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-card__badge">Full-Stack Teammate</span>
+            <p class="testimonial-card__quote">"Working alongside Sudharrshan on full-stack web applications has been an absolute pleasure. He has a rare balance of engineering rigor and design aesthetic — building seamless API integrations with responsive frontend interfaces that just work."</p>
+            <p class="testimonial-card__author">— Raghul, Full Stack Developer & Hackathon Partner</p>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-card__badge">Engineering Peer</span>
+            <p class="testimonial-card__quote">"Sudharrshan is one of the most proactive and curious engineers I've worked with. Whether optimizing deep learning models or architecting scalable backend systems, his dedication to clean code, performance, and teamwork consistently elevates the entire group."</p>
+            <p class="testimonial-card__author">— Jayagovind, Systems & AI Engineering Peer</p>
+          </div>
+        </div>
+        <div class="testimonial-nav" id="testimonial-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       GitHub Activity (Live Stats)
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="github-activity">
+    <div class="container">
+      <span class="section-label reveal">10 // GitHub Activity</span>
+      <h2 class="section-title reveal">Open-Source Footprint</h2>
+      <p class="section-subtitle reveal">Live stats from my GitHub profile — always up to date.</p>
+
+      <div class="github-stats">
+        <div class="github-stats__card reveal">
+          <img
+            src="https://streak-stats.demolab.com?user=mrtechdynamo23&theme=tokyonight-duo&hide_border=true&background=080D14&ring=5CC8FF&fire=38D6C0&currStreakLabel=5CC8FF&sideLabels=38D6C0&dates=8FA3B5&currStreakNum=E8F1F7&sideNums=E8F1F7&stroke=080D14&border_radius=10"
+            alt="GitHub Streak Stats for mrtechdynamo23"
+            loading="lazy"
+          >
+        </div>
+
+        <div class="github-stats__card reveal reveal-delay-1" style="display: flex; justify-content: center; align-items: center;">
+          <img
+            src="https://ghchart.rshah.org/5cc8ff/mrtechdynamo23"
+            alt="GitHub Contribution Graph for mrtechdynamo23"
+            loading="lazy"
+            style="width: 100%; max-width: 800px; height: auto;"
+          >
+        </div>
+
+        <div class="github-stats__views reveal reveal-delay-2">
+          <img
+            src="https://komarev.com/ghpvc/?username=mrtechdynamo23&label=Profile+Views&color=5cc8ff&style=flat-square"
+            alt="GitHub Profile Views Counter"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       More on GitHub (Compact Repo Grid)
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="more-repos">
+    <div class="container">
+      <span class="section-label reveal">11 // More on GitHub</span>
+      <h2 class="section-title reveal">Other Repositories</h2>
+      <p class="section-subtitle reveal">A selection of other projects and experiments.</p>
+
+      <div class="repo-grid">
+
+        <a href="https://github.com/mrtechdynamo23/car-rental" target="_blank" rel="noopener" class="repo-chip reveal">
+          <div class="repo-chip__info">
+            <span class="repo-chip__name">car-rental</span>
+            <span class="repo-chip__lang"><span class="repo-chip__lang-dot repo-chip__lang-dot--python"></span> Python</span>
+          </div>
+          <svg class="repo-chip__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="https://github.com/mrtechdynamo23/hexaware-it-asset-management" target="_blank" rel="noopener" class="repo-chip reveal reveal-delay-1">
+          <div class="repo-chip__info">
+            <span class="repo-chip__name">hexaware-it-asset-management</span>
+            <span class="repo-chip__lang"><span class="repo-chip__lang-dot repo-chip__lang-dot--python"></span> Python</span>
+          </div>
+          <svg class="repo-chip__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="https://github.com/mrtechdynamo23/sadara" target="_blank" rel="noopener" class="repo-chip reveal reveal-delay-2">
+          <div class="repo-chip__info">
+            <span class="repo-chip__name">sadara</span>
+            <span class="repo-chip__lang"><span class="repo-chip__lang-dot repo-chip__lang-dot--javascript"></span> JavaScript</span>
+          </div>
+          <svg class="repo-chip__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="https://github.com/mrtechdynamo23/Sadara-EOS" target="_blank" rel="noopener" class="repo-chip reveal">
+          <div class="repo-chip__info">
+            <span class="repo-chip__name">Sadara-EOS</span>
+            <span class="repo-chip__lang"><span class="repo-chip__lang-dot repo-chip__lang-dot--html"></span> HTML</span>
+          </div>
+          <svg class="repo-chip__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="https://github.com/mrtechdynamo23/spotify-clone" target="_blank" rel="noopener" class="repo-chip reveal reveal-delay-1">
+          <div class="repo-chip__info">
+            <span class="repo-chip__name">spotify-clone</span>
+            <span class="repo-chip__lang"><span class="repo-chip__lang-dot repo-chip__lang-dot--css"></span> CSS</span>
+          </div>
+          <svg class="repo-chip__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+        <a href="https://github.com/mrtechdynamo23/Gym-Management-Website" target="_blank" rel="noopener" class="repo-chip reveal reveal-delay-2">
+          <div class="repo-chip__info">
+            <span class="repo-chip__name">Gym-Management-Website</span>
+            <span class="repo-chip__lang"><span class="repo-chip__lang-dot repo-chip__lang-dot--html"></span> HTML</span>
+          </div>
+          <svg class="repo-chip__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+
+      </div>
+
+      <div class="repos__all-btn reveal">
+        <a href="https://github.com/mrtechdynamo23?tab=repositories" target="_blank" rel="noopener" class="btn btn--secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          View All Repositories on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Currently Learning (Terminal Style)
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="learning">
+    <div class="container">
+      <span class="section-label reveal">12 // Currently Learning</span>
+      <h2 class="section-title reveal">What I'm Exploring</h2>
+      <p class="section-subtitle reveal">Continuously expanding my toolkit and deepening my expertise.</p>
+
+      <div class="terminal reveal">
+        <div class="terminal__header">
+          <span class="terminal__dot terminal__dot--red"></span>
+          <span class="terminal__dot terminal__dot--yellow"></span>
+          <span class="terminal__dot terminal__dot--green"></span>
+          <span class="terminal__title">sudharrshan@portfolio:~/learning</span>
+        </div>
+        <div class="terminal__body">
+          <div>
+            <span class="terminal__prompt">❯</span> <span class="terminal__cmd">cat current_focus.md</span>
+          </div>
+          <br>
+          <span class="terminal__category">🤖 Generative AI</span>
+          <div class="terminal__items">LLMs, Prompt Engineering, RAG, LangChain</div>
+
+          <span class="terminal__category">☁️ Cloud & DevOps</span>
+          <div class="terminal__items">Azure, CI/CD, Docker, Kubernetes</div>
+
+          <span class="terminal__category">📊 Advanced Data Analytics</span>
+          <div class="terminal__items">Pandas, ML Pipelines, Power BI</div>
+
+          <span class="terminal__category">🏗️ System Design</span>
+          <div class="terminal__items">Scalability, Microservices, DB Optimization</div>
+
+          <span class="terminal__category">🔐 Security</span>
+          <div class="terminal__items">Web App Security, Network Protocols, Secure Coding</div>
+          <br>
+          <div>
+            <span class="terminal__prompt">❯</span> <span class="typed-cursor">|</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════════════
+       Notes & Writing
+       ═══════════════════════════════════════════════════ -->
+  <section class="section" id="writing">
+    <div class="container">
+      <span class="section-label reveal">13 // Notes & Writing</span>
+      <h2 class="section-title reveal">Notes &amp; Writing</h2>
+      <p class="section-subtitle reveal">Technical essays, architectural breakdowns, and research deep dives.</p>
+
+      <div class="writings-grid">
+        <div class="writing-card reveal">
+          <span class="tag tag--cyan writing-card__tag">Research &amp; Deep Learning</span>
+          <span class="writing-card__title">Predicting CRISPR gRNA Efficiency: Why CNNs Excel at Genomic Feature Extraction</span>
+          <p class="writing-card__excerpt">A deep dive into encoding nucleotide sequence matrices, capturing spatial motif hierarchies, and minimizing off-target cleavage risks using convolutional networks.</p>
+          <div class="writing-card__meta"><span>Mar 2026</span><span>7 min read</span></div>
+        </div>
+        <div class="writing-card reveal reveal-delay-1">
+          <span class="tag tag--teal writing-card__tag">Voice AI &amp; Systems</span>
+          <span class="writing-card__title">Architecting Low-Latency Voice AI: Lessons from Building Jarvis 2.0</span>
+          <p class="writing-card__excerpt">Deconstructing the streaming speech-to-intent pipeline: continuous ASR buffers, semantic intent classification, and synthesis optimizations that keep latency sub-400ms.</p>
+          <div class="writing-card__meta"><span>Feb 2026</span><span>5 min read</span></div>
+        </div>
+        <div class="writing-card reveal reveal-delay-2">
+          <span class="tag writing-card__tag">Full Stack Architecture</span>
+          <span class="writing-card__title">Bridging Spring Boot &amp; Modern React: High-Concurrency Enterprise Patterns</span>
+          <p class="writing-card__excerpt">Patterns for clean layered architecture, JWT authentication, connection pooling with MySQL, and building responsive client applications that scale under load.</p>
+          <div class="writing-card__meta"><span>Dec 2025</span><span>6 min read</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       Contact Section
+       ═══════════════════════════════════════════════════ -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <span class="section-label reveal">14 // Contact</span>
+      <h2 class="section-title reveal">Let's Connect</h2>
+      <p class="section-subtitle reveal">Got a project idea or just want to say hi? I'd love to hear from you.</p>
+
+      <div class="contact__grid">
+        <div class="contact__text reveal">
+          <h3>I'm open to collaborate.</h3>
+          <p>
+            Whether you're looking for a developer for your next project, want to discuss AI and technology, or just want to connect — my inbox is always open. I'll try my best to get back to you!
+          </p>
+          <a href="mailto:sudharrshancourse23@gmail.com" class="btn btn--primary" style="margin-top: 0.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Say Hello
+          </a>
+        </div>
+
+        <div class="contact__links reveal reveal-delay-2">
+          <a href="mailto:sudharrshancourse23@gmail.com" class="contact-link">
+            <div class="contact-link__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <span class="contact-link__label">Email</span>
+              <span class="contact-link__value">sudharrshancourse23@gmail.com</span>
+            </div>
+          </a>
+
+          <a href="tel:+919585244783" class="contact-link">
+            <div class="contact-link__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <span class="contact-link__label">Phone</span>
+              <span class="contact-link__value">+91 95852 44783</span>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/sudharrshan-s" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <span class="contact-link__label">LinkedIn</span>
+              <span class="contact-link__value">linkedin.com/in/sudharrshan-s</span>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/sudharrshan__" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div>
+              <span class="contact-link__label">Instagram</span>
+              <span class="contact-link__value">@sudharrshan__</span>
+            </div>
+          </a>
+
+          <a href="https://github.com/mrtechdynamo23" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div>
+              <span class="contact-link__label">GitHub</span>
+              <span class="contact-link__value">github.com/mrtechdynamo23</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       Footer
+       ═══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">
+        Designed & built by <span>Sudharrshan S</span> · © 2026
+      </p>
+      <div class="footer__socials">
+        <a href="https://github.com/mrtechdynamo23" target="_blank" rel="noopener" class="footer__social-link" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sudharrshan-s" target="_blank" rel="noopener" class="footer__social-link" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://www.instagram.com/sudharrshan__" target="_blank" rel="noopener" class="footer__social-link" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════
+       Project Detail Modal (single, reused for all cards)
+       ═══════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-box__close" id="modal-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-box__icon" id="modal-icon"></div>
+      <h3 class="modal-box__title" id="modal-title"></h3>
+      <p class="modal-box__description" id="modal-description"></p>
+      <div class="modal-box__stack" id="modal-stack"></div>
+      <div class="modal-box__links" id="modal-links"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       Scripts (order matters: fluid first, then main, then enhance)
+       ═══════════════════════════════════════════════════ -->
+  <script src="fluid.js"></script>
+  <script src="script.js"></script>
+  <script src="enhance.js"></script>
+
+</body>
+</html>
