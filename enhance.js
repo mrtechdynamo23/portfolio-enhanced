@@ -36,58 +36,154 @@
   updateProgress();
 
   /* ══════════════════════════════════════════════════════
-     2. Custom cursor
+     2. Custom cursor & Minor Comet Tail
      ══════════════════════════════════════════════════════ */
 
   if (!prefersReducedMotion && isFinePointer) {
     const dot = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
+    const tailDots = document.querySelectorAll('.cursor-tail__dot');
 
     if (dot && ring) {
       document.body.classList.add('has-custom-cursor');
 
       let mouseX = window.innerWidth / 2;
       let mouseY = window.innerHeight / 2;
+      let prevMouseX = mouseX;
+      let prevMouseY = mouseY;
       let ringX = mouseX;
       let ringY = mouseY;
+      let isHovering = false;
+      let isLoopRunning = false;
 
-      let isAnimatingRing = false;
+      // 5 trailing micro-nodes for a sleek, subtle cursor tail
+      const tailPos = [
+        { x: mouseX, y: mouseY },
+        { x: mouseX, y: mouseY },
+        { x: mouseX, y: mouseY },
+        { x: mouseX, y: mouseY },
+        { x: mouseX, y: mouseY }
+      ];
+      const tailSizes = [4.5, 3.8, 3.0, 2.2, 1.5];
+      const tailAlphas = [0.72, 0.54, 0.38, 0.24, 0.12];
 
-      function animateRing() {
-        const dx = mouseX - ringX;
-        const dy = mouseY - ringY;
-        ringX += dx * 0.18;
-        ringY += dy * 0.18;
-        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+      // Pre-set fixed dimensions once (avoids layout reflows on every animation frame)
+      tailDots.forEach((el, i) => {
+        el.style.width = tailSizes[i] + 'px';
+        el.style.height = tailSizes[i] + 'px';
+      });
 
-        if (Math.abs(dx) > 0.2 || Math.abs(dy) > 0.2) {
-          requestAnimationFrame(animateRing);
-        } else {
-          isAnimatingRing = false;
+      window.addEventListener('mousedown', () => {
+        dot.classList.add('cursor-dot--active');
+        ring.classList.add('cursor-ring--active');
+      });
+      window.addEventListener('mouseup', () => {
+        dot.classList.remove('cursor-dot--active');
+        ring.classList.remove('cursor-ring--active');
+      });
+
+      function wakeLoop() {
+        if (!isLoopRunning && !document.hidden) {
+          isLoopRunning = true;
+          requestAnimationFrame(renderCursor);
         }
       }
 
       window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-        if (!isAnimatingRing) {
-          isAnimatingRing = true;
-          requestAnimationFrame(animateRing);
-        }
+        dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        wakeLoop();
       }, { passive: true });
+
+      window.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+        tailDots.forEach((d) => { d.style.opacity = '0'; });
+      });
+
+      window.addEventListener('mouseenter', () => {
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        wakeLoop();
+      });
+
+      // Completely pause animation loop when tab is in background
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          isLoopRunning = false;
+        } else {
+          wakeLoop();
+        }
+      });
+
+      function renderCursor() {
+        if (document.hidden) {
+          isLoopRunning = false;
+          return;
+        }
+
+        // Smooth ring lerp
+        const rdx = mouseX - ringX;
+        const rdy = mouseY - ringY;
+        ringX += rdx * 0.22;
+        ringY += rdy * 0.22;
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+        // Minor tail physics (chained spring lag)
+        tailPos[0].x += (mouseX - tailPos[0].x) * 0.52;
+        tailPos[0].y += (mouseY - tailPos[0].y) * 0.52;
+        let maxTailDelta = Math.hypot(mouseX - tailPos[0].x, mouseY - tailPos[0].y);
+
+        for (let i = 1; i < tailPos.length; i++) {
+          tailPos[i].x += (tailPos[i - 1].x - tailPos[i].x) * 0.44;
+          tailPos[i].y += (tailPos[i - 1].y - tailPos[i].y) * 0.44;
+          const d = Math.hypot(tailPos[i - 1].x - tailPos[i].x, tailPos[i - 1].y - tailPos[i].y);
+          if (d > maxTailDelta) maxTailDelta = d;
+        }
+
+        const speed = Math.hypot(mouseX - prevMouseX, mouseY - prevMouseY);
+        prevMouseX = mouseX;
+        prevMouseY = mouseY;
+        const showTail = speed > 0.4 && !isHovering;
+
+        for (let i = 0; i < tailDots.length; i++) {
+          tailDots[i].style.transform = `translate3d(${tailPos[i].x}px, ${tailPos[i].y}px, 0) translate(-50%, -50%)`;
+          tailDots[i].style.opacity = showTail ? tailAlphas[i] : '0';
+        }
+
+        // Zero-CPU idle sleep: when motion stops and nodes have settled, stop requestAnimationFrame loop
+        const ringDist = Math.hypot(rdx, rdy);
+        if (speed < 0.05 && ringDist < 0.1 && maxTailDelta < 0.1) {
+          ringX = mouseX;
+          ringY = mouseY;
+          ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+          for (let i = 0; i < tailDots.length; i++) {
+            tailDots[i].style.opacity = '0';
+          }
+          isLoopRunning = false;
+          return; // Dormant until next mousemove
+        }
+
+        requestAnimationFrame(renderCursor);
+      }
+
+      // Initial wake up to place cursor elements
+      wakeLoop();
 
       const attachHoverListeners = () => {
         document
-          .querySelectorAll('a, button, .filter-btn, .testimonial-dot, .back-to-top, .navbar__resume-btn, .modal-box__close, .project-card__expand')
+          .querySelectorAll('a, button, .filter-btn, .testimonial-dot, .back-to-top, .navbar__resume-btn, .modal-box__close, .project-card__expand, .theme-toggle')
           .forEach((el) => {
             if (el.dataset.cursorBound) return;
             el.dataset.cursorBound = 'true';
             el.addEventListener('mouseenter', () => {
+              isHovering = true;
               ring.classList.add('cursor-ring--hover');
               dot.style.opacity = '0';
             });
             el.addEventListener('mouseleave', () => {
+              isHovering = false;
               ring.classList.remove('cursor-ring--hover');
               dot.style.opacity = '1';
             });
@@ -101,15 +197,16 @@
             if (el.dataset.cursorCardBound) return;
             el.dataset.cursorCardBound = 'true';
             el.addEventListener('mouseenter', () => {
+              isHovering = true;
               ring.classList.add('cursor-ring--card');
             });
             el.addEventListener('mouseleave', () => {
+              isHovering = false;
               ring.classList.remove('cursor-ring--card');
             });
           });
       };
       attachHoverListeners();
-      // Re-scan after content is injected/filtered (modal, testimonials, filters)
       window.addEventListener('load', attachHoverListeners);
       setTimeout(attachHoverListeners, 800);
     }
@@ -284,6 +381,14 @@
       slider.addEventListener('mouseenter', stopAutoplay);
       slider.addEventListener('mouseleave', startAutoplay);
     }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
   }
 
   /* ══════════════════════════════════════════════════════
@@ -314,7 +419,8 @@
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.3}px)`;
+        // Subtle tactile response without overshooting
+        btn.style.transform = `translate(${x * 0.12}px, ${y * 0.16}px)`;
       });
       btn.addEventListener('mouseleave', () => {
         btn.style.transform = '';
@@ -322,83 +428,76 @@
     });
   }
 
+
+
   /* ══════════════════════════════════════════════════════
-     9. Ambient particle background
+     10. Theme Toggle Controller (Dark / Light)
      ══════════════════════════════════════════════════════ */
 
-  if (!prefersReducedMotion && window.innerWidth > 768) {
-    const canvas = document.getElementById('particles-canvas');
+  const themeToggle = document.getElementById('theme-toggle');
 
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      let width, height, particles;
-      const PARTICLE_COUNT = 22;
-      const LINK_DIST = 110;
-      const LINK_DIST_SQ = LINK_DIST * LINK_DIST;
+  function getTheme() {
+    return document.documentElement.getAttribute('data-theme') || 'dark';
+  }
 
-      function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
+  function applyTheme(theme, animate = true) {
+    const html = document.documentElement;
 
-      function initParticles() {
-        particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
-          r: Math.random() * 1.2 + 0.5,
-        }));
-      }
+    if (animate) {
+      html.classList.add('theme-transition');
+    }
 
-      resize();
-      initParticles();
-      window.addEventListener('resize', resize);
+    html.setAttribute('data-theme', theme);
 
-      let isRunning = true;
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          isRunning = false;
-        } else if (!isRunning) {
-          isRunning = true;
-          requestAnimationFrame(draw);
-        }
-      });
+    try {
+      localStorage.setItem('portfolio-theme', theme);
+    } catch (e) {}
 
-      function draw() {
-        if (!isRunning) return;
-        ctx.clearRect(0, 0, width, height);
+    // Update accessible labels
+    if (themeToggle) {
+      const label = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
+      const title = theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.setAttribute('title', title);
+    }
 
-        particles.forEach((p) => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > width) p.vx *= -1;
-          if (p.y < 0 || p.y > height) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(92, 200, 255, 0.28)';
-          ctx.fill();
-        });
+    // Dispatch global theme change event for WebGL / canvas modules
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
 
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distSq = dx * dx + dy * dy;
-            if (distSq < LINK_DIST_SQ) {
-              const dist = Math.sqrt(distSq);
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(56, 214, 192, ${0.11 * (1 - dist / LINK_DIST)})`;
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
+    if (animate) {
+      setTimeout(() => {
+        html.classList.remove('theme-transition');
+      }, 300);
+    }
+  }
+
+  if (themeToggle) {
+    // Initial sync of accessible label
+    const initialTheme = getTheme();
+    themeToggle.setAttribute(
+      'aria-label',
+      initialTheme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'
+    );
+    themeToggle.setAttribute(
+      'title',
+      initialTheme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'
+    );
+
+    themeToggle.addEventListener('click', () => {
+      const current = getTheme();
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next, true);
+    });
+
+    // Listen to system preference changes if user hasn't explicitly set preference
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        try {
+          if (!localStorage.getItem('portfolio-theme')) {
+            applyTheme(e.matches ? 'dark' : 'light', true);
           }
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
+        } catch (err) {}
+      });
     }
   }
 })();

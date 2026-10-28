@@ -23,25 +23,40 @@
 
   <!-- Favicon (simple SVG) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <!-- Theme detection (prevents flash of wrong theme) -->
+  <script>
+    (function () {
+      try {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
   <!-- Subtle architectural technical grid -->
   <div class="bg-grid" aria-hidden="true"></div>
 
-  <!-- Ambient blue/cyan glow orbs -->
+  <!-- Ambient soft lighting -->
   <div class="ambient-glow ambient-glow--1" aria-hidden="true"></div>
   <div class="ambient-glow ambient-glow--2" aria-hidden="true"></div>
 
   <!-- Scroll progress indicator -->
   <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- Ambient particle background (desktop only, respects reduced motion) -->
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
-
-  <!-- Custom cursor (fine-pointer devices only) -->
+  <!-- Custom cursor & minor tail (fine-pointer devices only) -->
   <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-tail" id="cursor-tail" aria-hidden="true">
+    <span class="cursor-tail__dot"></span>
+    <span class="cursor-tail__dot"></span>
+    <span class="cursor-tail__dot"></span>
+    <span class="cursor-tail__dot"></span>
+    <span class="cursor-tail__dot"></span>
+  </div>
 
   <!-- Back to top -->
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">
@@ -55,29 +70,52 @@
     <div class="navbar__inner">
       <a href="#hero" class="navbar__logo">Sudharrshan<span>.</span></a>
 
-      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+      <div class="navbar__right">
+        <ul class="navbar__links" id="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="https://drive.google.com/file/d/1m_BI1i1JIBHQ9YwfouI_EunDIn7b9juR/view?usp=sharing" target="_blank" rel="noopener" class="navbar__resume-btn">
+              ↓ Resume
+            </a>
+          </li>
+        </ul>
 
-      <ul class="navbar__links" id="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li>
-          <a href="https://drive.google.com/file/d/1m_BI1i1JIBHQ9YwfouI_EunDIn7b9juR/view?usp=sharing" target="_blank" rel="noopener" class="navbar__resume-btn">
-            ↓ Resume
-          </a>
-        </li>
-      </ul>
+        <div class="navbar__controls">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme" title="Toggle theme (Light / Dark)">
+            <!-- Moon icon (active in light mode, clicks to switch to dark) -->
+            <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <!-- Sun icon (active in dark mode, clicks to switch to light) -->
+            <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -85,7 +123,6 @@
        Hero Section
        ═══════════════════════════════════════════════════ -->
   <section class="hero" id="hero">
-    <canvas id="fluid-canvas"></canvas>
     <div class="hero__overlay"></div>
 
     <div class="hero__content">
@@ -1233,9 +1270,8 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════
-       Scripts (order matters: fluid first, then main, then enhance)
+       Scripts
        ═══════════════════════════════════════════════════ -->
-  <script src="fluid.js"></script>
   <script src="script.js"></script>
   <script src="enhance.js"></script>
 

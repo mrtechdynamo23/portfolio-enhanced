@@ -8,9 +8,10 @@ A modern, high-performance developer portfolio featuring interactive WebGL fluid
 
 ## 🎨 Visual Design System
 
-- **Palette**: Obsidian (`#080D14`, `#0D1622`), Midnight Navy (`#111D2B`), Electric Cyan (`#5CC8FF`), and Teal (`#38D6C0`).
-- **Interactive Fluid Canvas**: Real-time WebGL fluid dynamics engine with low-power battery detection and dynamic quality scaling.
-- **Micro-Interactions**: 3D perspective tilt on cards, cursor-following glow, staggered scroll reveals, and custom modal overlays.
+- **Dual Theme Support**:
+  - **Dark Mode (Default)**: Luxurious Obsidian & Metallic Gold theme (`#0A0B0D`, `#13151A`, `#E5C368`, `#D4AF37`) with refined warm ambient lighting.
+  - **Light Mode**: Modern, ultra-clean Slate & Vibrant Blue theme (`#F8FAFC`, `#0F172A`, `#2563EB`, `#0D9488`) with zero gold tinting.
+- **Micro-Interactions**: Chained spring physics cursor with subtle comet tail (featuring zero-CPU idle sleep and automatic background-tab throttling), 3D perspective tilt on cards, staggered scroll reveals, and modal details.
 - **Zero Framework Bloat**: Pure semantic HTML5, Vanilla CSS3 (custom properties & responsive grids), and modular vanilla JavaScript.
 
 ---

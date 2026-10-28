@@ -21,24 +21,39 @@
 
   /* ── configuration ───────────────────────────────────── */
 
+  /* ── configuration & dual theme palettes ─────────────── */
+
+  const THEME_PALETTES = {
+    dark: [
+      [0.40, 0.73, 0.91],   // #65B9E8 ice blue
+      [0.45, 0.78, 0.71],   // #73C8B5 muted teal
+      [0.55, 0.82, 0.96],   // soft ice highlight
+      [0.18, 0.44, 0.62],   // deep slate blue
+      [0.28, 0.65, 0.76],   // cyan-teal bridge
+    ],
+    light: [
+      [0.20, 0.44, 0.60],   // #326F99 slate blue
+      [0.21, 0.50, 0.45],   // #367F73 muted teal
+      [0.28, 0.55, 0.72],   // cool sky blue
+      [0.18, 0.40, 0.52],   // deep cool blue
+      [0.22, 0.52, 0.56],   // subtle blue-teal
+    ],
+  };
+
+  function getCurrentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
   const CONFIG = {
     SIM_RESOLUTION: 96,         // optimized simulation grid
     DYE_RESOLUTION: 512,        // lightweight dye texture resolution
-    PRESSURE_ITERATIONS: 12,    // fast Jacobi solver iterations (reduces GPU passes)
-    CURL: 25,                   // vorticity confinement
-    SPLAT_RADIUS: 0.22,         // normalised radius of each splat
-    SPLAT_FORCE: 5500,
-    VELOCITY_DISSIPATION: 0.25,
-    DENSITY_DISSIPATION: 1.1,
-    // Accent colours (Dark Obsidian + Midnight Navy + Electric Cyan + Teal palette)
-    COLORS: [
-      [0.36, 0.78, 1.0],   // #5CC8FF  electric cyan
-      [0.22, 0.84, 0.75],  // #38D6C0  vibrant teal
-      [0.66, 0.91, 1.0],   // #A8E7FF  soft ice-blue highlight
-      [0.11, 0.44, 0.65],  // #1D6FA5  deep ocean blue
-      [0.15, 0.72, 0.88],  // luminous cyan-teal bridge
-    ],
-    AUTO_SPLAT_INTERVAL: 2400,  // ms between subtle ambient splats
+    PRESSURE_ITERATIONS: 12,    // fast Jacobi solver iterations
+    CURL: 22,                   // organic vorticity confinement
+    SPLAT_RADIUS: 0.22,         // clear visible radius of each splat
+    SPLAT_FORCE: 4600,          // responsive energetic response to motion
+    VELOCITY_DISSIPATION: 0.28, // natural velocity damping
+    DENSITY_DISSIPATION: 1.15,  // smooth dissipation allowing dye trails to linger
+    AUTO_SPLAT_INTERVAL: 3200,  // ms between subtle ambient splats
   };
 
   /* ── canvas setup ────────────────────────────────────── */
@@ -63,11 +78,18 @@
     return;
   }
 
-  // Graceful fallback function (Cyan & Teal atmospheric radials)
+  // Graceful fallback function adapting to theme
   function applyFallbackGradient() {
-    canvas.style.background =
-      'radial-gradient(ellipse at 30% 40%, rgba(92,200,255,0.12), transparent 60%),' +
-      'radial-gradient(ellipse at 70% 60%, rgba(56,214,192,0.08), transparent 50%)';
+    const isLight = getCurrentTheme() === 'light';
+    if (isLight) {
+      canvas.style.background =
+        'radial-gradient(ellipse at 30% 40%, rgba(50,111,153,0.06), transparent 60%),' +
+        'radial-gradient(ellipse at 70% 60%, rgba(54,127,115,0.05), transparent 50%)';
+    } else {
+      canvas.style.background =
+        'radial-gradient(ellipse at 30% 40%, rgba(101,185,232,0.08), transparent 60%),' +
+        'radial-gradient(ellipse at 70% 60%, rgba(115,200,181,0.06), transparent 50%)';
+    }
   }
 
   // Handle WebGL context loss gracefully
@@ -506,33 +528,68 @@
     pointer.moved = Math.abs(pointer.dx) > 0 || Math.abs(pointer.dy) > 0;
   }
 
-  canvas.addEventListener('mousemove', (e) => {
+  const heroSection = document.getElementById('hero');
+  const pointerHost = heroSection || canvas;
+
+  pointerHost.addEventListener('mousemove', (e) => {
     updatePointerPos(e.clientX, e.clientY);
     pointer.down = true;
-  });
-  canvas.addEventListener('mouseleave', () => { pointer.down = false; });
+  }, { passive: true });
 
-  canvas.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    const t = e.touches[0];
-    updatePointerPos(t.clientX, t.clientY);
+  pointerHost.addEventListener('mousedown', (e) => {
+    updatePointerPos(e.clientX, e.clientY);
     pointer.down = true;
-  }, { passive: false });
-  canvas.addEventListener('touchstart', (e) => {
-    const t = e.touches[0];
-    updatePointerPos(t.clientX, t.clientY);
-    pointer.prevX = pointer.x;
-    pointer.prevY = pointer.y;
-    pointer.down = true;
-  }, { passive: false });
-  canvas.addEventListener('touchend', () => { pointer.down = false; });
+    for (let i = 0; i < 4; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const force = CONFIG.SPLAT_FORCE * 0.0007;
+      splat(pointer.x, pointer.y, Math.cos(angle) * force, Math.sin(angle) * force, randomColor());
+    }
+  });
+
+  pointerHost.addEventListener('mouseleave', () => { pointer.down = false; });
+
+  pointerHost.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      const t = e.touches[0];
+      updatePointerPos(t.clientX, t.clientY);
+      pointer.down = true;
+    }
+  }, { passive: true });
+
+  pointerHost.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      const t = e.touches[0];
+      updatePointerPos(t.clientX, t.clientY);
+      pointer.prevX = pointer.x;
+      pointer.prevY = pointer.y;
+      pointer.down = true;
+      for (let i = 0; i < 3; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const force = CONFIG.SPLAT_FORCE * 0.0006;
+        splat(pointer.x, pointer.y, Math.cos(angle) * force, Math.sin(angle) * force, randomColor());
+      }
+    }
+  }, { passive: true });
+
+  pointerHost.addEventListener('touchend', () => { pointer.down = false; });
 
   /* ── Simulation helpers ──────────────────────────────── */
 
   function randomColor() {
-    const c = CONFIG.COLORS[Math.floor(Math.random() * CONFIG.COLORS.length)];
-    return [c[0] * 0.6, c[1] * 0.6, c[2] * 0.6]; // keep subtle
+    const theme = getCurrentTheme();
+    const palette = THEME_PALETTES[theme] || THEME_PALETTES.dark;
+    const c = palette[Math.floor(Math.random() * palette.length)];
+    // Vibrant translucent dye rendering
+    const factor = theme === 'light' ? 0.60 : 0.75;
+    return [c[0] * factor, c[1] * factor, c[2] * factor];
   }
+
+  // Handle external theme change event
+  window.addEventListener('themechange', () => {
+    if (!gl) {
+      applyFallbackGradient();
+    }
+  });
 
   function splat(x, y, dx, dy, color) {
     const prog = programs.splat;
@@ -562,23 +619,23 @@
   function autoSplat(time) {
     if (time - lastAutoSplat < CONFIG.AUTO_SPLAT_INTERVAL) return;
     lastAutoSplat = time;
-    const x = 0.15 + Math.random() * 0.7;
-    const y = 0.15 + Math.random() * 0.7;
+    const x = 0.2 + Math.random() * 0.6;
+    const y = 0.2 + Math.random() * 0.6;
     const angle = Math.random() * Math.PI * 2;
-    const force = CONFIG.SPLAT_FORCE * (0.3 + Math.random() * 0.4);
+    const force = CONFIG.SPLAT_FORCE * (0.2 + Math.random() * 0.3);
     const dx = Math.cos(angle) * force;
     const dy = Math.sin(angle) * force;
-    splat(x, y, dx * 0.0004, dy * 0.0004, randomColor());
+    splat(x, y, dx * 0.0003, dy * 0.0003, randomColor());
   }
 
-  // Initial burst
+  // Gentle initial ambient pulse
   function initialSplats() {
-    for (let i = 0; i < 5; i++) {
-      const x = 0.2 + Math.random() * 0.6;
-      const y = 0.2 + Math.random() * 0.6;
+    for (let i = 0; i < 2; i++) {
+      const x = 0.3 + Math.random() * 0.4;
+      const y = 0.3 + Math.random() * 0.4;
       const angle = Math.random() * Math.PI * 2;
-      const dx = Math.cos(angle) * CONFIG.SPLAT_FORCE * 0.0003;
-      const dy = Math.sin(angle) * CONFIG.SPLAT_FORCE * 0.0003;
+      const dx = Math.cos(angle) * CONFIG.SPLAT_FORCE * 0.00025;
+      const dy = Math.sin(angle) * CONFIG.SPLAT_FORCE * 0.00025;
       splat(x, y, dx, dy, randomColor());
     }
   }

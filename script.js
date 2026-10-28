@@ -237,11 +237,12 @@
         card.style.setProperty('--mouse-x', `${x}px`);
         card.style.setProperty('--mouse-y', `${y}px`);
 
-        const rotateX = ((y - centerY) / centerY) * -2.5;
-        const rotateY = ((x - centerX) / centerX) * 2.5;
+        // Subtle, restrained tactile response without exaggerated tilt
+        const rotateX = ((y - centerY) / centerY) * -0.8;
+        const rotateY = ((x - centerX) / centerX) * 0.8;
 
         card.style.transform =
-          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
       });
 
       card.addEventListener('mouseleave', () => {
